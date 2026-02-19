@@ -1,0 +1,211 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* ================= HEADER ================= */
+.header {
+  background: linear-gradient(to right, #141e30, #243b55);
+  color: white;
+  padding-bottom: 80px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10%;
+  align-items: center;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+}
+
+.navbar li {
+  margin-left: 25px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Hover Effect */
+.navbar a:hover {
+  color: #00adb5;
+}
+
+.navbar a::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #00adb5;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+/* Intro Section */
+.intro {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.intro h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* ================= SECTIONS ================= */
+.section {
+  padding: 80px 10%;
+  min-height: 80vh;
+}
+
+.section h2 {
+  margin-bottom: 40px;
+  font-size: 32px;
+  color: #333;
+  text-align: center;
+}
+
+/* Section Colors */
+.home-section { background-color: #f0f8ff; }
+.about-section { background-color: #f5f5dc; }
+.skills-section { background-color: #fffacd; }
+.projects-section { background-color: #ffe4e1; }
+.contact-section { background-color: #e6e6fa; }
+
+/* ================= SKILLS (Interactive) ================= */
+.skills-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.skill-card {
+  background: white;
+  border: 2px solid #00adb5;
+  color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.skill-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  background: #00adb5;
+  color: white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.skill-card h3 {
+  margin: 10px 0;
+}
+
+.skill-card svg {
+  transition: 0.3s;
+}
+
+.skill-card:hover svg {
+  color: white;
+}
+
+/* ================= PROJECTS (Interactive) ================= */
+.projects-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.project-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.project-card h3 {
+  color: #243b55;
+  margin-bottom: 10px;
+}
+
+/* Buttons that appear on hover */
+.project-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  opacity: 0; /* Hidden by default */
+  transform: translateY(20px);
+  transition: 0.3s ease-in-out;
+}
+
+.project-card:hover .project-links {
+  opacity: 1; /* Show on hover */
+  transform: translateY(0);
+}
+
+.btn {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  background: #243b55;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.btn:hover {
+  background: #00adb5;
+}
+
+/* ================= CONTACT ================= */
+.contact-section {
+  text-align: center;
+}
+
+.contact-section p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}

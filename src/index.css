@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  background: linear-gradient(to right, #141e30, #243b55);
+  color: white;
+  padding-bottom: 80px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10%;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 25px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* Hover Effect */
+.nav-links a:hover {
+  color: #00adb5;
+}
+
+.nav-links a::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #00adb5;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Intro Section */
+
+.intro {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.intro h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+  padding: 80px 10%;
+  min-height: 80vh;
+}
+
+section h2 {
+  margin-bottom: 20px;
+  font-size: 32px;
+  color: #333;
+}
+
+/* Skills */
+
+.skills-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.skill-card {
+  background: #00adb5;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.skill-card:hover {
+  transform: scale(1.1);
+  background: #007b83;
+}
+
+/* Projects */
+
+.projects-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.project-card {
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  width: 250px;
+  transition: 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ================= CONTACT PAGE ================= */
+
+.contact-page {
+  padding: 80px 10%;
+  min-height: 100vh;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-form button {
+  padding: 10px;
+  border: none;
+  background: #00adb5;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  background: #007b83;
+}
+
+/* Footer */
+
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  background: #111;
+  color: white;
+  padding: 20px;
+}
