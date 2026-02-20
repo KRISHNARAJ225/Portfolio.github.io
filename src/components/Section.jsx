@@ -1,123 +1,452 @@
-import React from 'react';
-// Importing specific icons for Skills and Projects
-import { FaReact, FaNodeJs, FaHtml5, FaCss3, FaJs, FaDatabase, FaGithub, FaBootstrap, FaExternalLinkAlt } from 'react-icons/fa';
+// components/Sections.jsx
 
-function Section() {
+import React, { useEffect } from 'react';  // ← best version if you use useState too
+import { 
+  FaDownload, FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaDatabase, 
+  FaBootstrap, FaJava, FaGithub, FaExternalLinkAlt, FaEnvelope, FaPhone ,  FaLayerGroup , FaMicrochip,
+} from 'react-icons/fa';
+import {
+  // ... your existing imports ...
+  FaBookOpen, FaNetworkWired, FaUsers, FaCode, FaPuzzlePiece,
+  FaBrain, FaPaintBrush, FaLink, FaFileAlt, FaEye
+} from 'react-icons/fa';
+
+function Sections() {
+  const name = "Krishna Raj R";
+  const nameLetters = name.split("");
+
+useEffect(() => {
+  const img = document.querySelector('.profile-img');
+  if (!img) return;
+
+  const fadeOutIn = () => {
+    img.classList.remove('fade-active');
+    setTimeout(() => {
+      img.classList.add('fade-active');
+    }, 1500); // fade duration 1.5s
+  };
+
+  // start visible
+  img.classList.add('fade-active');
+
+  const interval = setInterval(fadeOutIn, 7000); // every 7 seconds
+
+  return () => clearInterval(interval);
+}, []);
+
+
+<form
+  className="contact-form"
+  action="https://api.web3forms.com/submit"
+  method="POST"
+  onSubmit={() => setStatus('sending')}
+>
+  {/* ... hidden fields + inputs ... */}
+
+  <button type="submit" disabled={status === 'sending'}>
+    {status === 'sending' ? 'Sending...' : <><FaEnvelope /> Send Message</>}
+  </button>
+
+  {status === 'sending' && <p className="form-status">Sending your message...</p>}
+</form>
+
+
   return (
-    <main className="main">
-      {/* HOME SECTION */}
-      <section id="home" className="section home-section">
-        <div className="container">
-          <h2>Welcome to My Portfolio</h2>
-          <p>I'm a passionate MERN Stack Developer with experience in building full-stack web applications.</p>
+    <>
+   
+{/* Hero - Professional style */}
+<section id="home" className="hero">
+  <div className="hero-content">
+    <h1 className="hero-title">
+      Hi, I'm <span className="highlight">Krishna Raj R</span>
+    </h1>
+    <p className="hero-subtitle">
+      Software Developer | MERN Specialist | Java Enthusiast
+    </p>
+    <p className="hero-description">
+      Building scalable, user-focused web applications with clean code and modern technologies
+    </p>
+    <div className="hero-buttons">
+      <a 
+        href="/assets/resume.pdf" 
+        download="Krishna_Raj_R_Resume.pdf" 
+        className="resume-btn"
+      >
+        <FaDownload /> Download Resume
+      </a>
+      <a href="#contact" className="contact-btn">
+        <FaEnvelope /> Get in Touch
+      </a>
+    </div>
+  </div>
+</section>
+{/* Centered profile photo with fade effect */}
+<div className="centered-profile-photo">
+  <img
+    src="/assets/KRISHNARAJ.jpg"
+    alt="Krishna Raj R"
+    className="profile-img fade-active"
+  />
+</div>
+
+      {/* About */}
+      <section id="about" className="section">
+        <h2>About Me</h2>
+        <p style={{maxWidth:'820px', margin:'0 auto', fontSize:'1.25rem', lineHeight:1.8, textAlign:'center'}}>
+         I'm Krishna Raj, a passionate <strong >Software Developer</strong> specializing in the <strong>MERN stack</strong> , with a strong focus on building scalable, user-centric web applications that deliver real business value.
+With expertise in React for dynamic front-end experiences, Node.js + Express for robust APIs, and MongoDB for flexible data management, I create end-to-end solutions — from responsive UIs to secure, high-performance backends and also
+enjoy solving real-world problems with clean architecture, performance optimization, and intuitive user interfaces.
+Whether it's building responsive single-page applications.
+        </p>
+      </section>
+
+      {/* Skills */}
+      <section id="skills" className="section" style={{background:'#f8f9fa'}}>
+        <h2>My Skills</h2>
+        <div className="skills-grid">
+          <div className="skill-item"><FaCode />C</div>
+          <div className="skill-item"><FaJava /> Java</div>
+          <div className="skill-item"><FaHtml5 /> HTML5</div>
+          <div className="skill-item"><FaCss3Alt /> CSS3</div>
+          <div className="skill-item"><FaJs /> JavaScript (ES6+)</div>
+          <div className="skill-item"><FaBootstrap /> Bootstrap</div>
+          <div className="skill-item"><FaReact /> React.js</div>
+          <div className="skill-item"><FaNodeJs /> Node.js</div>
+          <div className="skill-item"><FaDatabase /> Express.js</div>
+          <div className="skill-item"><FaDatabase /> MongoDB</div>
         </div>
       </section>
 
-      {/* ABOUT SECTION */}
-      <section id="about" className="section about-section">
-        <div className="container">
-          <h2>About Me</h2>
-          <p>With an engineering background and a deep interest in software development,<br /> I focus on building reliable, high-performance applications using modern technologies.</p>
+      {/* Experience */}
+      {/* Experience */}
+<section id="experience" className="section">
+  <h2>Experience</h2>
+  <div style={{maxWidth:'900px', margin:'0 auto'}}>
+    <div className="experience-item">
+      <h3>MERN Stack Developer</h3>
+      <p style={{color:'#555', margin:'0.5rem 0'}}>2025 – Present</p>
+      <p>Building an full-stack web applications using the MERN stack (MongoDB, Express.js, React, Node.js), developing responsive React components, building RESTful APIs, and integrating MongoDB for data persistence in collaborative team projects.</p>
+    </div>
+
+     <div className="experience-item">
+      <h3>Web Developer (Intern)</h3>
+      <p style={{color:'#555', margin:'0.5rem 0'}}>2024 – 2025</p>
+      <p>Developed and maintained responsive web applications using the MERN stack, collaborated on RESTful API integration, and contributed to UI enhancements and bug fixes in a fast-paced team</p>
+    </div> 
+    <div className="experience-item">
+      <h3>Java Developer (Intern / Freelance)</h3>
+      <p style={{color:'#555', margin:'0.5rem 0'}}>2023 – 2024</p>
+      <p>Contributed to the development and maintenance of Java-based applications, writing clean code, debugging issues, implementing features using Core Java / J2EE / Spring, and collaborating with the team on testing and optimization tasks.</p>
+    </div>
+    {/* Add more if needed */}
+  </div>
+</section>
+{/* Certifications - Add this RIGHT AFTER the Experience section closing </section> */}
+<section id="certifications" className="section certifications-section">
+  <h2>My Certifications</h2>
+  <div className="certifications-grid">
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaJava /></div> {/* Icon for learning/course */}
+      <div className="cert-info">
+        <h3>Java Programming</h3>
+        <p className="cert-provider">HackerRank</p>
+        <a href="https://www.hackerrank.com/certificates/c3a8d9a75d89" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaNetworkWired /></div> {/* Icon for IoT */}
+      <div className="cert-info">
+        <h3>Introduction to Internet Of Things</h3>
+        <p className="cert-provider">Nptel</p>
+        <a href="/assets/Introduction To Internet Of Things.jpg" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaUsers /></div> {/* Icon for soft skills */}
+      <div className="cert-info">
+        <h3>Introduction to Operating Systems</h3>
+        <p className="cert-provider">Nptel</p>
+        <a href="/assets/Introduction to Operating Systems.pdf" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaJs /></div> {/* Icon for programming */}
+      <div className="cert-info">
+        <h3>JavaScript</h3>
+        <p className="cert-provider">HackerRank</p>
+        <a href="https://www.hackerrank.com/certificates/3b716037921d" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaReact /></div> {/* Icon for Java */}
+      <div className="cert-info">
+        <h3>React</h3>
+        <p className="cert-provider">HackerRank</p>
+        <a href="https://www.hackerrank.com/certificates/2ec77335a119" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon">< FaNodeJs /></div> {/* Icon for problem solving */}
+      <div className="cert-info">
+        <h3>NodeJS</h3>
+        <p className="cert-provider">HackerRank</p>
+        <a href="https://www.hackerrank.com/certificates/4d3e00fa0a9d" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaBrain /></div> {/* Icon for deep learning */}
+      <div className="cert-info">
+        <h3>AI For Geodata Analysis</h3>
+        <p className="cert-provider">ISRO</p>
+        <a href="Ai For GeoData Analysis.pdf" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaLayerGroup /> </div> {/* Icon for UI/UX */}
+      <div className="cert-info">
+        <h3>FULL STACK Development</h3>
+        <p className="cert-provider">CUBIKSOFT TECHNOLOGIES</p>
+        <a href="/assets/CUBIKSOFT TECHNOLOGIES.pdf" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaPuzzlePiece /></div> {/* Icon for blockchain */}
+      <div className="cert-info">
+        <h3>Web Development</h3>
+        <p className="cert-provider">CORIZO</p>
+        <a href="/assets/CORIZO.jpg" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaDatabase /></div> {/* Icon for MongoDB */}
+      <div className="cert-info">
+        <h3>MongoDB </h3>
+        <p className="cert-provider">ICT Academy</p>
+        <a href="/assets/ICT Academy.pdf" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaReact /></div> {/* Icon for document model */}
+      <div className="cert-info">
+        <h3>ReactJs Developer</h3>
+        <p className="cert-provider">CodSoft</p>
+        <a href="/assets/CODSOFT.pdf" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div className="cert-card">
+      <div className="cert-icon"><FaMicrochip /></div> {/* Icon for SQL */}
+      <div className="cert-info">
+        <h3>EMBEDDED SYSTEMS AND IOT</h3>
+        <p className="cert-provider">TESSOLVE</p>
+        <a href="/assets/EMBEDDED SYSTEMS AND IOT.pdf" target="_blank" rel="noopener noreferrer" className="view-btn">
+          <FaEye /> View Certificate
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{/* Experience - Timeline */}
+<section id="experience" className="section experience-section">
+  <h2>Professional Experience</h2>
+  <div className="timeline">
+
+    <div className="timeline-item">
+      <div className="timeline-dot"></div>
+      <div className="timeline-content">
+        <div className="timeline-date">OCT 2024 – MAY 2025</div>
+        <h3>Full Stack Developer</h3>
+        <h4>CUBIKSOFT TECHNOLOGIES</h4>
+        <ul>
+          <li>Developed and maintained web applications, improving performance and UX</li>
+          <li>Collaborated with teams to deliver projects on time</li>
+          <li>Contributed innovative solutions supporting company growth</li>
+        </ul>
+      </div>
+    </div>
+
+    <div className="timeline-item">
+      <div className="timeline-dot"></div>
+      <div className="timeline-content">
+        <div className="timeline-date">Feb 2024 – May 2024</div>
+        <h3>ReactJs Developer</h3>
+        <h4>CodSoft</h4>
+        <ul>
+          <li>Built apps using HTML, CSS, JS & modern frameworks</li>
+          <li>Improved load times and performance → higher satisfaction</li>
+          <li>Streamlined processes with innovative solutions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div className="timeline-item">
+      <div className="timeline-dot"></div>
+      <div className="timeline-content">
+        <div className="timeline-date">OCT 2023 –  Feb 2024</div>
+        <h3>Web Developer</h3>
+        <h4>Corizo</h4>
+        <ul>
+          <li>Developed & optimized Java applications</li>
+          <li>Resolved client issues, improved reliability</li>
+          <li>Participated in code reviews & process improvements</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+    <div className="timeline-item">
+      <div className="timeline-dot"></div>
+      <div className="timeline-content">
+        <div className="timeline-date">JUL 2023 – OCT 2023</div>
+        <h3>Java Developer</h3>
+        <h4>InternPe</h4>
+        <ul>
+          <li>Built and maintained Java-based applications using OOP principles.</li>
+          <li>Developed backend modules with JDBC and MySQL integration.</li>
+          <li>Developed backend applications using Core Java.</li>
+        </ul>
+      </div>
+    </div>
+</section>
+
+      {/* Projects */}
+     {/* Projects */}
+{/* Projects */}
+<section id="projects" className="section" style={{background:'#f0f4f8'}}>
+  <h2>My Projects</h2>
+  <div className="projects-grid">
+
+    <div className="project-card">
+      <div className="project-icon-bg agro"></div> {/* background/icon layer */}
+      <div className="project-info">
+        <h3>Agro-Shopping</h3>
+        <p>Developed an Agro e-commerce website using the MERN stack with user-friendly interface, product management, enhanced visibility and client feedback integration.</p>
+        <div className="project-links">
+          <a href="https://github.com/KRISHNARAJ225" target="_blank" rel="noopener noreferrer" className="btn-project btn-github">
+            <FaGithub /> View Code
+          </a>
+          <a href="https://github.com/KRISHNARAJ225" target="_blank" rel="noopener noreferrer" className="btn-project btn-demo">
+            <FaExternalLinkAlt /> Live Demo
+          </a>
         </div>
-      </section>
+      </div>
+    </div>
 
-      {/* SKILLS SECTION - INTERACTIVE ICONS ADDED */}
-      <section id="skills" className="section skills-section">
-        <div className="container">
-          <h2>Technical Skills</h2>
-          <div className="skills-container">
-            
-            <div className="skill-card">
-              <FaReact size={30} />
-              <h3>React.js</h3>
-              <p>Hooks, Redux, Context API</p>
-            </div>
-
-            <div className="skill-card">
-              <FaNodeJs size={30} />
-              <h3>Node.js</h3>
-              <p>Express, REST APIs</p>
-            </div>
-
-            <div className="skill-card">
-              <FaDatabase size={30} />
-              <h3>MongoDB</h3>
-              <p>Mongoose, SQL</p>
-            </div>
-
-            <div className="skill-card">
-              <FaHtml5 size={30} />
-              <h3>HTML5</h3>
-              <p>Semantic HTML</p>
-            </div>
-
-            <div className="skill-card">
-              <FaCss3 size={30} />
-              <h3>CSS3</h3>
-              <p>Flexbox, Grid, Animations</p>
-            </div>
-            
-             <div className="skill-card">
-              <FaJs size={30} />
-              <h3>JavaScript</h3>
-              <p>ES6+, TypeScript</p>
-            </div>
-
-          </div>
+    <div className="project-card">
+      <div className="project-icon-bg expense"></div>
+      <div className="project-info">
+        <h3>Expense Tracker App</h3>
+        <p>MERN stack expense tracking & budgeting tool with real-time updates, data visualization, secure handling and continuous improvements based on feedback.</p>
+        <div className="project-links">
+          <a href="https://github.com/KRISHNARAJ225" target="_blank" rel="noopener noreferrer" className="btn-project btn-github">
+            <FaGithub /> View Code
+          </a>
+          <a href="https://github.com/KRISHNARAJ225" target="_blank" rel="noopener noreferrer" className="btn-project btn-demo">
+            <FaExternalLinkAlt /> Live Demo
+          </a>
         </div>
-      </section>
+      </div>
+    </div>
 
-      {/* PROJECTS SECTION - INTERACTIVE BUTTONS ADDED */}
-      <section id="projects" className="section projects-section">
-        <div className="container">
-          <h2>Projects</h2>
-          <div className="projects-container">
-            
-            {/* Project 1 */}
-            <div className="project-card">
-              <h3>E-commerce Platform</h3>
-              <p>Built with MERN stack, featuring user authentication, product catalog, and payment integration.</p>
-              <div className="project-links">
-                <a href="#" className="btn">View Code <FaGithub /></a>
-                <a href="#" className="btn">Live Demo <FaExternalLinkAlt /></a>
-              </div>
-            </div>
-
-            {/* Project 2 */}
-            <div className="project-card">
-              <h3>Blog Application</h3>
-              <p>Full-stack app with CRUD operations, user comments, and real-time updates using Socket.io.</p>
-              <div className="project-links">
-                <a href="#" className="btn">View Code <FaGithub /></a>
-                <a href="#" className="btn">Live Demo <FaExternalLinkAlt /></a>
-              </div>
-            </div>
-
-            {/* Project 3 */}
-            <div className="project-card">
-              <h3>Task Manager</h3>
-              <p>React-based frontend with Node.js backend and MongoDB for data persistence.</p>
-              <div className="project-links">
-                <a href="#" className="btn">View Code <FaGithub /></a>
-                <a href="#" className="btn">Live Demo <FaExternalLinkAlt /></a>
-              </div>
-            </div>
-
-          </div>
+    <div className="project-card">
+      <div className="project-icon-bg ai"></div>
+      <div className="project-info">
+        <h3>Lumen AI Pro</h3>
+        <p>Advanced AI solution with intelligent data analysis, real-time insights, predictive analytics, ML adaptation and seamless integration for web development projects.</p>
+        <div className="project-links">
+          <a href="https://github.com/KRISHNARAJ225" target="_blank" rel="noopener noreferrer" className="btn-project btn-github">
+            <FaGithub /> View Code
+          </a>
+          <a href="https://github.com/KRISHNARAJ225" target="_blank" rel="noopener noreferrer" className="btn-project btn-demo">
+            <FaExternalLinkAlt /> Live Demo
+          </a>
         </div>
-      </section>
+      </div>
+    </div>
 
-      {/* CONTACT SECTION */}
-      <section id="contact" className="section contact-section">
-        <div className="container">
-          <h2>Contact Me</h2>
-          <p>Email: john.doe@example.com</p>
-          <p>LinkedIn: linkedin.com/in/johndoe</p>
-          <p>GitHub: github.com/johndoe</p>
-        </div>
-      </section>
-    </main>
+  </div>
+</section>
+   
+      {/* Contact */}
+      {/* Contact */}
+<section id="contact" className="section">
+  <h2>Contact Me</h2>
+  
+  <div className="contact-welcome">
+    <p>Feel free to reach out! I'm always open to new opportunities, collaborations, or just a friendly chat.</p>
+    <p className="positive-note">Let's create something amazing together. 😊</p>
+  </div>
+
+<form
+  className="contact-form"
+  action="https://api.web3forms.com/submit"
+  method="POST"
+>
+  {/* Required hidden field with your Access Key */}
+  <input
+    type="hidden"
+    name="access_key"
+    value="ec176b4b-2f5f-4d2f-9fdb-31b9564d9ca7"   // ← PASTE YOUR REAL KEY HERE
+  />
+
+  {/* Optional: customize what you receive in email */}
+  <input type="hidden" name="subject" value="New Message from Portfolio" />
+  <input type="hidden" name="from_name" value="Portfolio Contact Form" />
+
+  {/* Your existing fields — just add name attributes */}
+  <input type="text" name="name" placeholder="Your Full Name" required />
+  <input type="email" name="email" placeholder="Your Email Address" required />
+  <input type="tel" name="phone" placeholder="Your Phone Number" />
+  <textarea name="message" placeholder="Write your message here..." rows="6" required></textarea>
+
+  {/* Simple spam protection (invisible field) */}
+  <input type="checkbox" name="botcheck" id="botcheck" style={{ display: "none" }} />
+
+  <button type="submit">
+    <FaEnvelope /> Send Message
+  </button>
+</form>
+</section>
+    </>
   );
 }
 
-export default Section;
+
+
+export default Sections;
