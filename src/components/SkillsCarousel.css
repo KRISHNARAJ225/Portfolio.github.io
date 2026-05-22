@@ -1,0 +1,242 @@
+/* Premium skills carousel — scoped to #skills only */
+
+#skills .skills-premium-stage {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 0 10px;
+  min-height: 520px;
+}
+
+#skills .skills-premium-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(88, 28, 135, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 28, 135, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, black 20%, transparent 75%);
+  pointer-events: none;
+}
+
+#skills .skills-premium-glow-center {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(520px, 90vw);
+  height: 340px;
+  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.35) 0%, transparent 68%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+#skills .skills-premium-carousel {
+  position: relative;
+  height: 430px;
+  perspective: 1400px;
+  overflow: hidden;
+}
+
+#skills .skill-premium-card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(300px, 78vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition:
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.75s ease,
+    filter 0.75s ease;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+#skills .skill-premium-card--active {
+  transform: translateX(-50%) scale(1) translateZ(40px);
+  opacity: 1;
+  z-index: 4;
+  filter: brightness(1);
+  pointer-events: auto;
+}
+
+#skills .skill-premium-card--prev {
+  transform: translateX(calc(-50% - clamp(200px, 28vw, 280px))) scale(0.78) translateZ(-60px);
+  opacity: 0.5;
+  z-index: 2;
+  filter: brightness(0.75);
+}
+
+#skills .skill-premium-card--next {
+  transform: translateX(calc(-50% + clamp(200px, 28vw, 280px))) scale(0.78) translateZ(-60px);
+  opacity: 0.55;
+  z-index: 2;
+  filter: brightness(0.8);
+}
+
+#skills .skill-premium-card--hidden {
+  transform: translateX(-50%) scale(0.55) translateZ(-120px);
+  opacity: 0;
+  z-index: 1;
+  visibility: hidden;
+}
+
+#skills .skill-premium-card-panel {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border-radius: 28px;
+  background: linear-gradient(165deg, #1a0a2e 0%, #0d0618 45%, #120820 100%);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(168, 85, 247, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+#skills .skill-premium-dots-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background-image: radial-gradient(rgba(168, 85, 247, 0.35) 1px, transparent 1px);
+  background-size: 10px 10px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+#skills .skill-premium-icon-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--skill-accent, #a855f7) 0%, transparent 70%);
+  opacity: 0.35;
+  filter: blur(18px);
+}
+
+#skills .skill-premium-icon-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#skills .skill-premium-icon {
+  font-size: clamp(4.5rem, 12vw, 5.5rem);
+  color: #f8fafc;
+  filter:
+    drop-shadow(0 0 20px var(--skill-accent, #a855f7))
+    drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+#skills .skill-premium-card--active .skill-premium-icon {
+  transform: scale(1.08);
+  filter:
+    drop-shadow(0 0 28px var(--skill-accent, #a855f7))
+    drop-shadow(0 0 48px rgba(168, 85, 247, 0.4))
+    drop-shadow(0 6px 16px rgba(0, 0, 0, 0.55));
+}
+
+#skills .skill-premium-title {
+  margin-top: 1.35rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1e1b4b !important;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.85);
+}
+
+#skills .skill-premium-tagline {
+  margin-top: 0.55rem;
+  max-width: 320px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #334155 !important;
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.75);
+}
+
+[data-theme='dark'] #skills .skill-premium-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(168, 85, 247, 0.35);
+}
+
+[data-theme='dark'] #skills .skill-premium-tagline {
+  color: rgba(248, 250, 252, 0.88) !important;
+  text-shadow: none;
+}
+
+#skills .skill-premium-card--prev .skill-premium-title,
+#skills .skill-premium-card--prev .skill-premium-tagline,
+#skills .skill-premium-card--next .skill-premium-title,
+#skills .skill-premium-card--next .skill-premium-tagline {
+  opacity: 0.85;
+}
+
+#skills .skill-premium-card--hidden .skill-premium-title,
+#skills .skill-premium-card--hidden .skill-premium-tagline {
+  opacity: 0;
+}
+
+#skills .skills-premium-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+#skills .skills-premium-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(168, 85, 247, 0.35);
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#skills .skills-premium-dot:hover {
+  background: rgba(168, 85, 247, 0.65);
+  transform: scale(1.15);
+}
+
+#skills .skills-premium-dot.active {
+  background: #a855f7;
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.8);
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  #skills .skills-premium-carousel {
+    height: 400px;
+  }
+
+  #skills .skill-premium-card-panel {
+    height: 260px;
+  }
+
+  #skills .skill-premium-card--prev {
+    transform: translateX(calc(-50% - 155px)) scale(0.72) translateZ(-60px);
+  }
+
+  #skills .skill-premium-card--next {
+    transform: translateX(calc(-50% + 155px)) scale(0.72) translateZ(-60px);
+  }
+}

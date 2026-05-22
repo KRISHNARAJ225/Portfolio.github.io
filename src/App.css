@@ -239,30 +239,54 @@
   color: var(--text-color) !important;
 }
 
-/* Skills section in normal mode (Light) */
+/* Skills section — background image only */
 #skills {
-  background-color: var(--section-bg) !important;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.88)),
+    url('/my%20skill.png') center/cover no-repeat !important;
   color: var(--text-color) !important;
+}
+
+[data-theme='dark'] #skills {
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.9)),
+    url('/my%20skill.png') center/cover no-repeat !important;
 }
 
 #skills h2 {
   color: var(--text-color) !important;
+  position: relative;
+  z-index: 1;
 }
 
-#skills .skill-item {
-  background: var(--card-bg);
-  color: var(--text-color);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+#skills .skills-premium-stage {
+  position: relative;
+  z-index: 1;
 }
 
-/* Featured Projects section in normal mode (Light) */
+/* Featured Projects section — background image only */
 #projects {
-  background-color: var(--section-bg) !important;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.88)),
+    url('/premium%20skill.png') center/cover no-repeat !important;
   color: var(--text-color) !important;
+}
+
+[data-theme='dark'] #projects {
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.9)),
+    url('/premium%20skill.png') center/cover no-repeat !important;
 }
 
 #projects h2 {
   color: var(--text-color) !important;
+  position: relative;
+  z-index: 1;
+}
+
+#projects .projects-grid-modern {
+  position: relative;
+  z-index: 1;
 }
 
 /* Cards in Projects section (ensure they look good on white) */
@@ -563,19 +587,57 @@
   position: relative;
 }
 
-.hero-title .highlight::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 4px;
-  bottom: -8px;
-  left: 0;
-  background: #00d4ff;
-  transition: width 0.6s ease;
+/* Coding Ninjas–style letter reveal for hero name */
+.hero-title .name-animated {
+  display: inline-block;
+  font-family: 'Orbitron', 'Syne', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  vertical-align: baseline;
 }
 
-.hero-title:hover .highlight::after {
-  width: 100%;
+.hero-title .name-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(28px) scale(0.65);
+  filter: blur(6px);
+  color: rgba(224, 247, 255, 0.35);
+  transition:
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease,
+    color 0.35s ease,
+    text-shadow 0.35s ease;
+}
+
+.hero-title .name-letter.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  color: #7dd3fc;
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.35);
+}
+
+.hero-title .name-letter.active {
+  color: #ffffff;
+  transform: translateY(-6px) scale(1.14);
+  text-shadow:
+    0 0 18px rgba(0, 212, 255, 0.95),
+    0 0 36px rgba(59, 130, 246, 0.65),
+    0 4px 14px rgba(0, 0, 0, 0.35);
+  animation: nameLetterPulse 1s ease-in-out infinite;
+}
+
+@keyframes nameLetterPulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.25);
+  }
 }
 
 .hero-subtitle {
@@ -1205,6 +1267,11 @@
   .centered-profile-photo {
     margin: 2rem auto 3rem;
   }
+
+  .hero-title .name-animated {
+    font-size: 0.72em;
+    letter-spacing: 0.04em;
+  }
 }
 
 /* Contact section specific background */
@@ -1415,4 +1482,334 @@
   border-color: var(--accent-color);
   transform: translateY(-10px);
   cursor: pointer;
+}
+
+/* ───────────────────────────────
+   Professional Experience — chain lift along timeline (additive)
+─────────────────────────────── */
+.experience-section .timeline {
+  overflow: visible;
+}
+
+.experience-section .timeline::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  background: #00d4ff;
+  border-radius: 50%;
+  box-shadow: 0 0 18px #00d4ff, 0 0 36px rgba(0, 212, 255, 0.55);
+  z-index: 3;
+  pointer-events: none;
+  animation: timelineGlowTravel 24s infinite ease-in-out;
+}
+
+@keyframes timelineGlowTravel {
+  0% {
+    top: 4%;
+    opacity: 0.35;
+  }
+
+  12% {
+    top: 18%;
+    opacity: 1;
+  }
+
+  37% {
+    top: 42%;
+    opacity: 1;
+  }
+
+  62% {
+    top: 66%;
+    opacity: 1;
+  }
+
+  87% {
+    top: 88%;
+    opacity: 1;
+  }
+
+  100% {
+    top: 96%;
+    opacity: 0.35;
+  }
+}
+
+@keyframes expTimelineCardLift {
+  0%,
+  20%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
+  }
+
+  7%,
+  14% {
+    transform: translateY(-32px);
+    box-shadow: 0 22px 48px rgba(0, 212, 255, 0.38);
+  }
+}
+
+@keyframes expTimelineDotPulse {
+  0%,
+  20%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(0, 212, 255, 0.2);
+  }
+
+  7%,
+  14% {
+    transform: scale(1.4);
+    box-shadow: 0 0 0 14px rgba(0, 212, 255, 0.45), 0 0 24px #00d4ff;
+  }
+}
+
+.experience-section .timeline .timeline-item:nth-child(1) .timeline-dot,
+.experience-section > .timeline-item .timeline-dot {
+  animation: expTimelineDotPulse 24s infinite ease-in-out;
+  animation-delay: 0s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(2) .timeline-dot {
+  animation: expTimelineDotPulse 24s infinite ease-in-out;
+  animation-delay: 6s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(3) .timeline-dot {
+  animation: expTimelineDotPulse 24s infinite ease-in-out;
+  animation-delay: 12s;
+}
+
+.experience-section > .timeline-item .timeline-dot {
+  animation-delay: 18s;
+}
+
+.experience-section .timeline-content {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Carousel focus — shimmer sweep when each card is reached (additive) */
+.experience-section .timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(0, 212, 255, 0.08) 35%,
+    rgba(0, 212, 255, 0.35) 50%,
+    rgba(0, 212, 255, 0.08) 65%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: expCarouselShimmer 24s infinite ease-in-out;
+}
+
+.experience-section .timeline-content::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  animation: expCarouselFocusRing 24s infinite ease-in-out;
+}
+
+@keyframes expCarouselShimmer {
+  0%,
+  20%,
+  100% {
+    left: -120%;
+    opacity: 0;
+  }
+
+  8% {
+    left: -40%;
+    opacity: 1;
+  }
+
+  14% {
+    left: 130%;
+    opacity: 0.6;
+  }
+}
+
+@keyframes expCarouselFocusRing {
+  0%,
+  20%,
+  100% {
+    opacity: 0;
+    border-color: transparent;
+    transform: scale(0.97);
+    box-shadow: none;
+  }
+
+  7%,
+  14% {
+    opacity: 1;
+    border-color: rgba(0, 212, 255, 0.85);
+    transform: scale(1.02);
+    box-shadow: 0 0 28px rgba(0, 212, 255, 0.45), inset 0 0 20px rgba(0, 212, 255, 0.08);
+  }
+}
+
+/* Carousel focus — dim non-active cards, pop active (additive) */
+@keyframes expTimelineCarouselDim {
+  0%,
+  20%,
+  100% {
+    opacity: 0.62;
+    filter: saturate(0.8) brightness(0.9);
+  }
+
+  7%,
+  14% {
+    opacity: 1;
+    filter: saturate(1.12) brightness(1.05);
+  }
+}
+
+@keyframes expTimelineCarouselSlideOdd {
+  0%,
+  20%,
+  100% {
+    transform: translateX(0);
+  }
+
+  7%,
+  14% {
+    transform: translateX(16px);
+  }
+}
+
+@keyframes expTimelineCarouselSlideEven {
+  0%,
+  20%,
+  100% {
+    transform: translateX(0);
+  }
+
+  7%,
+  14% {
+    transform: translateX(-16px);
+  }
+}
+
+.experience-section .timeline .timeline-item:nth-child(odd) {
+  animation: expTimelineCarouselDim 24s infinite ease-in-out,
+    expTimelineCarouselSlideOdd 24s infinite ease-in-out;
+}
+
+.experience-section .timeline .timeline-item:nth-child(even) {
+  animation: expTimelineCarouselDim 24s infinite ease-in-out,
+    expTimelineCarouselSlideEven 24s infinite ease-in-out;
+}
+
+.experience-section > .timeline-item {
+  animation: expTimelineCarouselDim 24s infinite ease-in-out,
+    expTimelineCarouselSlideOdd 24s infinite ease-in-out;
+}
+
+.experience-section .timeline .timeline-item:nth-child(1) {
+  animation-delay: 0s, 0s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(2) {
+  animation-delay: 6s, 6s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(3) {
+  animation-delay: 12s, 12s;
+}
+
+.experience-section > .timeline-item {
+  animation-delay: 18s, 18s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(1) .timeline-content::before,
+.experience-section .timeline .timeline-item:nth-child(1) .timeline-content::after,
+.experience-section > .timeline-item .timeline-content::before,
+.experience-section > .timeline-item .timeline-content::after {
+  animation-delay: 0s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(2) .timeline-content::before,
+.experience-section .timeline .timeline-item:nth-child(2) .timeline-content::after {
+  animation-delay: 6s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(3) .timeline-content::before,
+.experience-section .timeline .timeline-item:nth-child(3) .timeline-content::after {
+  animation-delay: 12s;
+}
+
+.experience-section > .timeline-item .timeline-content::before,
+.experience-section > .timeline-item .timeline-content::after {
+  animation-delay: 18s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(1) .timeline-content,
+.experience-section > .timeline-item .timeline-content {
+  z-index: 1;
+}
+
+.experience-section .timeline .timeline-item:nth-child(1) .timeline-content,
+.experience-section > .timeline-item .timeline-content {
+  animation: expTimelineCardLift 24s infinite ease-in-out,
+    expTimelineCarouselCardPop 24s infinite ease-in-out;
+  animation-delay: 0s, 0s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(2) .timeline-content {
+  animation: expTimelineCardLift 24s infinite ease-in-out,
+    expTimelineCarouselCardPop 24s infinite ease-in-out;
+  animation-delay: 6s, 6s;
+}
+
+.experience-section .timeline .timeline-item:nth-child(3) .timeline-content {
+  animation: expTimelineCardLift 24s infinite ease-in-out,
+    expTimelineCarouselCardPop 24s infinite ease-in-out;
+  animation-delay: 12s, 12s;
+}
+
+.experience-section > .timeline-item .timeline-content {
+  animation: expTimelineCardLift 24s infinite ease-in-out,
+    expTimelineCarouselCardPop 24s infinite ease-in-out;
+  animation-delay: 18s, 18s;
+}
+
+@keyframes expTimelineCarouselCardPop {
+  0%,
+  20%,
+  100% {
+    filter: brightness(1);
+  }
+
+  7%,
+  14% {
+    filter: brightness(1.1);
+  }
+}
+
+.experience-section .timeline-content > * {
+  position: relative;
+  z-index: 3;
+}
+
+.experience-section .timeline-content:hover,
+.experience-section .timeline-content:hover::before,
+.experience-section .timeline-content:hover::after,
+.experience-section .timeline-item:hover {
+  animation-play-state: paused;
 }

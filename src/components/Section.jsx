@@ -10,10 +10,40 @@ import {
   FaBookOpen, FaNetworkWired, FaUsers, FaCode, FaPuzzlePiece,
   FaBrain, FaPaintBrush, FaLink, FaFileAlt, FaEye
 } from 'react-icons/fa';
+import SkillsCarousel from './SkillsCarousel';
 
 function Sections() {
   const name = "Krishna Raj R";
   const nameLetters = name.split("");
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [activeLetterIndex, setActiveLetterIndex] = useState(-1);
+
+  const getNextFocusIndex = (fromIndex) => {
+    if (nameLetters.length === 0) return 0;
+    let next = (fromIndex + 1) % nameLetters.length;
+    let guard = 0;
+    while (nameLetters[next] === ' ' && guard < nameLetters.length) {
+      next = (next + 1) % nameLetters.length;
+      guard += 1;
+    }
+    return next;
+  };
+
+  useEffect(() => {
+    if (visibleCount < nameLetters.length) {
+      const revealTimer = setTimeout(() => {
+        setVisibleCount((prev) => prev + 1);
+        setActiveLetterIndex(visibleCount);
+      }, 550);
+      return () => clearTimeout(revealTimer);
+    }
+
+    const focusTimer = setInterval(() => {
+      setActiveLetterIndex((prev) => getNextFocusIndex(prev < 0 ? -1 : prev));
+    }, 1000);
+
+    return () => clearInterval(focusTimer);
+  }, [visibleCount, nameLetters.length]);
 
   useEffect(() => {
     const img = document.querySelector('.profile-img');
@@ -43,7 +73,17 @@ function Sections() {
       <section id="home" className="hero">
         <div className="hero-content">
           <h1 className="hero-title">
-            Hi, I'm <span className="highlight">Krishna Raj R</span>
+            Hi, I'm{' '}
+            <span className="highlight name-animated" aria-label={name}>
+              {nameLetters.map((letter, index) => (
+                <span
+                  key={`${letter}-${index}`}
+                  className={`name-letter${index < visibleCount ? ' visible' : ''}${index === activeLetterIndex && letter !== ' ' ? ' active' : ''}`}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span>
+              ))}
+            </span>
           </h1>
           <p className="hero-subtitle">
             Software Developer | MERN Specialist | Java Enthusiast
@@ -88,18 +128,7 @@ function Sections() {
       {/* Skills */}
       <section id="skills" className="section">
         <h2>My Skills</h2>
-        <div className="skills-grid">
-          <div className="skill-item"><FaCode />C</div>
-          <div className="skill-item"><FaJava /> Java</div>
-          <div className="skill-item"><FaHtml5 /> HTML5</div>
-          <div className="skill-item"><FaCss3Alt /> CSS3</div>
-          <div className="skill-item"><FaJs /> JavaScript (ES6+)</div>
-          <div className="skill-item"><FaBootstrap /> Bootstrap</div>
-          <div className="skill-item"><FaReact /> React.js</div>
-          <div className="skill-item"><FaNodeJs /> Node.js</div>
-          <div className="skill-item"><FaDatabase /> Express.js</div>
-          <div className="skill-item"><FaDatabase /> MongoDB</div>
-        </div>
+        <SkillsCarousel />
       </section>
 
       {/* Experience */}
