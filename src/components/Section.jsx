@@ -17,6 +17,9 @@ function Sections() {
   const nameLetters = name.split("");
   const [visibleCount, setVisibleCount] = useState(0);
   const [activeLetterIndex, setActiveLetterIndex] = useState(-1);
+  const [resumeFile, setResumeFile] = useState("/assets/KRISHNA RAJ R.pdf");
+  const [isSending, setIsSending] = useState(false);
+  const formRef = React.useRef(null);
 
   const getNextFocusIndex = (fromIndex) => {
     if (nameLetters.length === 0) return 0;
@@ -66,6 +69,23 @@ function Sections() {
 
   const [status, setStatus] = useState('');
 
+  useEffect(() => {
+    const resumeTimer = setInterval(() => {
+      setResumeFile(prev => prev === "/assets/KRISHNA RAJ R.pdf" ? "/assets/KRISHNA RAJ R CV.pdf" : "/assets/KRISHNA RAJ R.pdf");
+    }, 20000);
+    return () => clearInterval(resumeTimer);
+  }, []);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setIsSending(true);
+    setTimeout(() => {
+      if (formRef.current) {
+        formRef.current.submit();
+      }
+    }, 6000);
+  };
+
   return (
     <>
 
@@ -93,8 +113,8 @@ function Sections() {
           </p>
           <div className="hero-buttons">
             <a
-              href="/assets/resume.pdf"
-              download="Krishna_Raj_R_Resume.pdf"
+              href={resumeFile}
+              download={resumeFile.split('/').pop()}
               className="resume-btn"
             >
               <FaDownload /> Download Resume
@@ -244,7 +264,7 @@ function Sections() {
             <div className="cert-info">
               <h3>AI For Geodata Analysis</h3>
               <p className="cert-provider">ISRO</p>
-              <a href="Ai For GeoData Analysis.pdf" target="_blank" rel="noopener noreferrer" className="view-btn">
+              <a href="/assets/Ai.pdf" target="_blank" rel="noopener noreferrer" className="view-btn">
                 <FaEye /> View Certificate
               </a>
             </div>
@@ -466,7 +486,61 @@ function Sections() {
 
       {/* Contact */}
       {/* Contact */}
-      <section id="contact" className="section">
+      <section id="contact" className="section" style={{ position: 'relative' }}>
+        {isSending && (
+          <div style={{
+            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+            backgroundColor: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+            zIndex: 9999, display: 'flex', flexDirection: 'column',
+            alignItems: 'center', justifyContent: 'center', borderRadius: 'inherit',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              position: 'relative', width: '160px', height: '160px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center'
+            }}>
+              {/* Left Flying Message */}
+              <div style={{
+                position: 'absolute', top: '50%', left: '50%',
+                marginTop: '-24px', marginLeft: '-24px', fontSize: '3rem',
+                animation: 'fly-in-left 2s infinite cubic-bezier(0.4, 0, 0.2, 1), icon-color-toggle 3s infinite linear'
+              }}>
+                <FaEnvelope />
+              </div>
+              
+              {/* Right Flying Message */}
+              <div style={{
+                position: 'absolute', top: '50%', left: '50%',
+                marginTop: '-24px', marginLeft: '-24px', fontSize: '3rem',
+                animation: 'fly-in-right 2s infinite cubic-bezier(0.4, 0, 0.2, 1), icon-color-toggle 3s infinite linear',
+                animationDelay: '1s, 0s'
+              }}>
+                <FaEnvelope />
+              </div>
+
+              <div style={{
+                position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                border: '6px solid rgba(0, 123, 255, 0.1)', borderTop: '6px solid #007bff', borderRight: '6px solid #007bff',
+                borderRadius: '50%', animation: 'premium-spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite',
+                backgroundColor: 'rgba(255, 255, 255, 0.7)', zIndex: 2
+              }}></div>
+              <div style={{
+                fontSize: '4.5rem', display: 'inline-block',
+                animation: 'wave-animation 2.5s infinite', transformOrigin: 'bottom center',
+                zIndex: 3
+              }}>
+                👋
+              </div>
+            </div>
+            <h3 style={{ 
+              marginTop: '2.5rem', fontWeight: 'bold', letterSpacing: '2px', 
+              textTransform: 'uppercase', fontSize: '1.8rem', animation: 'color-toggle 1s infinite alternate' 
+            }}>
+              Sending Message...
+            </h3>
+          </div>
+        )}
+        
         <h2>Contact Me</h2>
 
         <div className="contact-welcome">
@@ -474,16 +548,55 @@ function Sections() {
           <p className="positive-note">Let's create something amazing together. 😊</p>
         </div>
 
+        <style>{`
+          @keyframes wave-animation {
+            0% { transform: rotate(0deg); }
+            20% { transform: rotate(15deg); }
+            40% { transform: rotate(-10deg); }
+            60% { transform: rotate(15deg); }
+            80% { transform: rotate(-10deg); }
+            100% { transform: rotate(0deg); }
+          }
+          @keyframes premium-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          @keyframes fly-in-left {
+            0% { transform: translateX(-50vw) scale(0); opacity: 0; }
+            20% { opacity: 1; transform: translateX(-25vw) scale(1.2); }
+            80% { transform: translateX(-40px) scale(0.8); opacity: 0.8; }
+            100% { transform: translateX(0px) scale(0); opacity: 0; }
+          }
+          @keyframes fly-in-right {
+            0% { transform: translateX(50vw) scale(0); opacity: 0; }
+            20% { opacity: 1; transform: translateX(25vw) scale(1.2); }
+            80% { transform: translateX(40px) scale(0.8); opacity: 0.8; }
+            100% { transform: translateX(0px) scale(0); opacity: 0; }
+          }
+          @keyframes color-toggle {
+            0% { color: #ff3b3b; }
+            50% { color: #28a745; }
+            100% { color: #ff3b3b; }
+          }
+          @keyframes icon-color-toggle {
+            0% { color: #ffca28; }
+            33% { color: #ab47bc; }
+            66% { color: #26c6da; }
+            100% { color: #ffca28; }
+          }
+        `}</style>
         <form
+          ref={formRef}
           className="contact-form"
           action="https://api.web3forms.com/submit"
           method="POST"
+          onSubmit={handleFormSubmit}
         >
           {/* Required hidden field with your Access Key */}
           <input
             type="hidden"
             name="access_key"
-            value="ec176b4b-2f5f-4d2f-9fdb-31b9564d9ca7"   // ← PASTE YOUR REAL KEY HERE
+            value="c9fbdd22-c43b-45d7-8400-404032986405"   // ← PASTE YOUR REAL KEY HERE
           />
 
           {/* Optional: customize what you receive in email */}
